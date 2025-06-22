@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://your-render-api.onrender.com' // deployed backend
+  baseUrl: 'https://realestate-a4xf.onrender.com/' // deployed backend
 };
