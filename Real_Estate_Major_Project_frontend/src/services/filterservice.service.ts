@@ -17,7 +17,7 @@ export class FilterserviceService {
 
   async getfilteredstate(state: string): Promise<void> {
     const data = await firstValueFrom(
-      this.http.get<any[]>(`${environment.baseUrl}/users/filtered-properties/${state}`)
+      this.http.get<any[]>(`${environment.baseUrl}/api/properties/filter?state=${state}`)
     );
     // this.houses.set(data);
     this.houses.set(data.map(house => ({
