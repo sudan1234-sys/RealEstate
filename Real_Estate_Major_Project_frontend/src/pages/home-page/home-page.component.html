@@ -1,0 +1,254 @@
+<body @fadeInOut  class="min-h-screen bg-gradient-to-br from-[#2C3E50] via-[#34495E] to-[#1B2631] text-[#ECF0F1]">
+
+  <!-- Hero Section -->
+  <div class="w-full h-[80vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-[100vh] bg-cover bg-center bg-no-repeat rounded-b-[20px] relative" 
+    style="background-image: url('../assets/images/pexels-photo-186077.jpeg');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+
+    <!-- Navbar -->
+    <div class="absolute w-full flex flex-row items-center justify-between bg-black/30 px-6 py-4">
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-white tracking-wide">EstateX</h1>
+      </div>
+
+      <div class="hidden md:flex flex-row space-x-6">
+        <div class="text-lg text-white hover:text-blue-400 cursor-pointer">Home</div>
+        <div (click)="navigatetoactivebid()" class="text-lg text-white hover:text-blue-400 cursor-pointer">ActiveBids</div>
+        <div class="text-lg text-white hover:text-blue-400 cursor-pointer">About Us</div>
+      </div>
+
+      <div class="flex flex-row space-x-4">
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition-all duration-300">Login</button>
+        <button (click)="gotosignup()" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-700 transition-all duration-300">Sign Up</button>
+      </div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-4 mt-10">
+      <h2 class="text-3xl sm:text-5xl font-bold text-[#FFFFFF] leading-tight drop-shadow-lg">Find Your Dream Home</h2>
+      
+      <!-- Search Bar & Dynamic Results Wrapper -->
+      <div class="flex flex-col w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden mt-5 relative z-10">
+        <div class="flex">
+          <!-- Dropdown -->
+          <!-- <select (input)="getState($event)" class="shrink-0 px-4 py-3 bg-gray-200 text-gray-700 border-l border-gray-300 focus:outline-none text-sm sm:text-base">
+            <option value="">Select State</option>
+            @for(states of indianStates; track $index){
+              <option [value]="states">{{states}}</option>
+            }
+          </select> -->
+          <div class="shrink-0 relative">
+            <!-- Input field with autocomplete -->
+            <input 
+              type="text"
+              [(ngModel)]="selectedState"
+              (ngModelChange)="filterstate()"
+              (click)="toggleStateDropdown()"
+              [matAutocomplete]="auto"
+              placeholder="Select State"
+              class="w-full px-4 py-3 bg-gray-200 text-gray-700 border-l border-gray-300 focus:outline-none text-sm sm:text-base"
+            >
+            
+            <!-- Dropdown arrow icon -->
+            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            
+            <!-- Autocomplete panel -->
+            <mat-autocomplete #auto="matAutocomplete" [classList]="'bg-white shadow-lg rounded-b-lg mt-1'">
+              @for (state of filterdStates; track state) {
+                <mat-option [value]="state" class="hover:bg-gray-100 px-4 py-2">
+                  {{state}}
+                </mat-option>
+              }
+            </mat-autocomplete>
+          </div>
+          
+          <!-- Input Field -->
+          <input 
+            type="text" (click)="togglesearch()" [(ngModel)]='searchvalue' (ngModelChange)="filterCity()"
+            placeholder="Enter City State or Locality..." 
+            class="min-w-0 flex-1 px-4 py-3 text-gray-700 focus:outline-none placeholder-gray-500 text-sm sm:text-base" 
+          />
+          <!-- Search Button -->
+          <button (click)="goToDummy()" class="shrink-0 px-6 py-3 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 text-sm sm:text-base">
+            Search
+          </button>
+        </div>
+        <!-- Dynamic Search Results Container -->
+       @if(toggle){ <div   class="mt-4 w-full bg-white text-purple-500 rounded-lg shadow-lg p-4 relative z-20">
+          <!-- Render your search results here -->
+          @if(!isReady){
+            @for(city of searchResults; track $index){
+              
+              <div (click)="fillsearch(city)" class="py-2 border-b border-gray-200 last:border-none hover:cursor-pointer">
+                {{city}}
+              </div>
+            
+           
+            }
+          }
+          @else {
+            <div style="display: flex; align-items: center;justify-content: center;"><mat-spinner></mat-spinner></div>
+            
+
+          }
+          
+          </div>
+      
+      }
+      </div>
+      
+      <!-- Optional Test Container (if needed) -->
+      
+      
+      <p class="mt-4 text-2xl sm:text-xl text-[#FFFFFF] max-w-2xl mx-auto">Discover the best listings for houses and lands tailored to your needs.</p>
+
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+        <button (click)="scrollToListings()" class="px-6 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all duration-300">Browse Listings</button>
+        <button [routerLink]="['/sell']" routerLinkActive="router-link-active"  class="px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-all duration-300">Sell Your Property</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose EstateX Section -->
+  <div class="p-10 bg-gradient-to-br from-[#2C3E50] via-[#34495E] to-[#1B2631]" appAnimate animationType="left">
+    <h2 class="text-4xl font-bold text-center mb-8">Why Choose EstateX?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 bg-[#34495E] rounded-lg shadow-lg" appAnimate animationType="left">
+        <h3 class="text-2xl font-semibold mb-3">Wide Range of Listings</h3>
+        <p>From cozy apartments to luxurious villas, we have something for every taste and budget.</p>
+      </div>
+      <div class="p-6 bg-[#34495E] rounded-lg shadow-lg" appAnimate animationType="left">
+        <h3 class="text-2xl font-semibold mb-3">Verified Properties</h3>
+        <p>We carefully verify each listing to ensure you get what you see — no hidden surprises.</p>
+      </div>
+      <div class="p-6 bg-[#34495E] rounded-lg shadow-lg" appAnimate animationType="left">
+        <h3 class="text-2xl font-semibold mb-3">Expert Support</h3>
+        <p>Our team of real estate experts is always ready to guide you through the buying or selling process.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Houses Section -->
+  <section #listings class="listings">
+  <div class="p-10 bg-gradient-to-br from-[#2C3E50] via-[#34495E] to-[#1B2631]" appAnimate animationType="left">
+    <h2 class="text-4xl font-bold text-center mb-8">Popular Houses</h2>
+   @if(isLoadingHouses){
+    <div 
+           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <app-cardskeleton *ngFor="let _ of [1,2,3,4]"></app-cardskeleton>
+      </div>
+   } 
+   @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- House Card  -->
+      @for(house of top4house; track house.id){
+      <div (click)="gotopropertydetails(house)" class="bg-[#34495E] rounded-lg shadow-lg overflow-hidden" appAnimate animationType="up">
+        <img [src]="house.photos[0]" class="h-48 w-full object-cover" alt="House">
+        <div class="p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl font-semibold">{{house.price}}</h3>
+            <span class="bg-blue-500 text-xs px-2 py-1 rounded">{{house.type}}</span>
+          </div>
+          <p class="text-gray-300 mb-2">{{house.bedrooms}} Beds • {{house.bathrooms}} Baths • {{house.landSize}}</p>
+          <p class="text-sm mb-3">{{house.city}}, {{house.state}}</p>
+          <div class="flex flex-wrap flex-row gap-2">
+            @for(features of house.features; track $index){
+              <div class="bg-[#2C3E50] px-2 py-1 rounded text-sm">{{features}}</div>
+            }
+          </div>
+        </div>
+      </div>
+      }
+      <!-- Add more house cards as needed -->
+    </div>
+  }
+  </div>
+</section>
+
+  <!-- Popular Lands Section -->
+  <div class="p-10 bg-gradient-to-br from-[#2C3E50] via-[#34495E] to-[#1B2631]" appAnimate animationType="right">
+    <h2 class="text-4xl font-bold text-center mb-8">Popular Lands</h2>
+        @if(isLoadingLands){<div
+         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <app-cardskeleton *ngFor="let _ of [1,2,3,4]"></app-cardskeleton>
+    </div>
+  } 
+  @else{
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for(land of top4land; track land.id){
+      <!-- Land Card 1 -->
+      <div (click)="gotoLanddetails(land)"  class="bg-[#34495E] rounded-lg shadow-lg overflow-hidden" appAnimate animationType="up">
+        <img [src]="land.landphotos[0]" class="h-48 w-full object-cover" alt="Land">
+        <div class="p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl font-semibold">{{land.price}}</h3>
+            <span class="bg-green-500 text-xs px-2 py-1 rounded">{{land.type}}</span>
+          </div>
+          <p class="text-gray-300 mb-2">{{land.size}} • @if(land.hasUtilities){ Utilities Available} @else{ Utilities Unavailable}</p>
+          <p class="text-sm mb-3">123 Main St, Springfield</p>
+          <div class="flex flex-wrap gap-2">
+            @for(features of land.features; track $index){
+              <span class="bg-[#2C3E50] px-2 py-1 rounded text-sm">{{features}}</span>
+            }
+            <span class="bg-[#2C3E50] px-2 py-1 rounded text-sm">@if(land.zoning){ Zoned} @else{Not Zoned}</span>
+          </div>
+        </div>
+      </div>
+      }
+      <!-- Add more land cards as needed -->
+    </div>
+  }
+  </div>
+
+  <!-- Key Features Section -->
+  <div class="p-10" appAnimate animationType="right">
+    <h2 class="text-4xl font-bold text-center mb-6" appAnimate animationType="right">Our Key Features</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 bg-[#34495E] rounded-lg shadow-lg" appAnimate animationType="right">
+        <h3 class="text-2xl font-semibold mb-3">Advanced Search</h3>
+        <p>Filter properties by price, location, type, and amenities...</p>
+      </div>
+      <div class="p-6 bg-[#34495E] rounded-lg shadow-lg" appAnimate animationType="right">
+        <h3 class="text-2xl font-semibold mb-3">3D Property Tours</h3>
+        <p>Explore homes with immersive 3D virtual tours...</p>
+      </div>
+      <div class="p-6 bg-[#34495E] rounded-lg shadow-lg" appAnimate animationType="right">
+        <h3 class="text-2xl font-semibold mb-3">Instant Notifications</h3>
+        <p>Get alerts for new listings or price changes...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="p-10" appAnimate animationType="up">
+    <h2 class="text-4xl font-bold text-center mb-6">What Our Clients Say</h2>
+    <div class="flex flex-col space-y-6">
+      <div class="p-6 bg-[#34495E] rounded-lg shadow-lg" appAnimate animationType="up">
+        <p class="italic">"EstateX helped me find my dream home..."</p>
+        <p class="text-right mt-4 font-bold">— Om K.</p>
+      </div>
+      <div class="p-6 bg-[#34495E] rounded-lg shadow-lg" appAnimate animationType="up">
+        <p class="italic">"The virtual tours saved me so much time..."</p>
+        <p class="text-right mt-4 font-bold">— Shorya S.</p>
+      </div>
+    </div>  
+  </div>
+
+  <!-- Contact Section -->
+  <div class="p-10" appAnimate animationType="up">
+    <h2 class="text-4xl font-bold text-center mb-6" animationType="up">Contact Us</h2>
+    <form [formGroup]="contactusform" (ngSubmit)="onSubmit()" class="max-w-2xl mx-auto space-y-4" animationType="up"> 
+      <input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-gray-200 text-gray-700 rounded-lg focus:outline-none" formControlName="name" animationType="up">
+      <input type="email" placeholder="Your Email" class="w-full px-4 py-3 bg-gray-200 text-gray-700 rounded-lg focus:outline-none" formControlName="email" animationType="up">
+      <textarea placeholder="Your Message" class="w-full px-4 py-3 bg-gray-200 text-gray-700 rounded-lg focus:outline-none" formControlName="message" animationType="up"></textarea>
+      <button class="w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300" animationType="up">Send Message</button>
+    </form>
+  </div>
+   <footer class="py-4 bg-[#1B2631] text-center h-16 flex items-center justify-center">
+    <p class="text-white">&copy; 2025 EstateX. All rights reserved.</p>
+  </footer>
+</body>

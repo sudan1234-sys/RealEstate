@@ -1,0 +1,41 @@
+<!-- 
+  This skeleton mirrors the structure of each Active Bid Property card:
+  - Left: image placeholder (h-48 w-full on small screens, h-auto w-48 on md+)
+  - Middle: title, state/postalCode, beds/baths, price placeholders
+  - Right: “Ends In” placeholder
+-->
+<div class="flex flex-col md:flex-row bg-white rounded-lg shadow-lg animate-pulse border border-gray-200 overflow-hidden">
+  <!-- Left: Image placeholder -->
+  <div class="w-full md:w-48 h-48 md:h-auto bg-gray-300"></div>
+
+  <!-- Middle: Property details placeholder -->
+  <div class="flex flex-col p-6 flex-grow space-y-2">
+    <!-- Title placeholder (street, city) -->
+    <div class="h-6 bg-gray-300 rounded w-3/4"></div>
+    <!-- State, postalCode placeholder -->
+    <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+
+    <!-- Beds/Baths row placeholder -->
+    <div class="flex gap-8">
+      <div class="space-y-1">
+        <div class="h-4 bg-gray-300 rounded w-12"></div> <!-- “Beds” label placeholder -->
+        <div class="h-5 bg-gray-300 rounded w-6"></div>  <!-- number placeholder -->
+      </div>
+      <div class="space-y-1">
+        <div class="h-4 bg-gray-300 rounded w-12"></div> <!-- “Baths” label placeholder -->
+        <div class="h-5 bg-gray-300 rounded w-6"></div>  <!-- number placeholder -->
+      </div>
+    </div>
+
+    <!-- Price placeholder -->
+    <div class="mt-4 h-6 bg-gray-300 rounded w-1/4"></div>
+  </div>
+
+  <!-- Right: “Ends In” placeholder -->
+  <div class="w-full md:w-40 bg-gray-300 flex flex-col justify-center items-center p-6 text-center space-y-2">
+    <!-- Label “Ends In” placeholder -->
+    <div class="h-4 bg-gray-200 rounded w-16"></div>
+    <!-- Time remaining placeholder -->
+    <div class="h-8 bg-gray-200 rounded w-12"></div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<!-- card-skeleton.component.html -->
+
+<!-- 
+  1) Top gray rectangle: acts as the “image” placeholder (h-48 w-full)
+  2) Row of two placeholders: 
+       • left = price/title (h-6) 
+       • right = badge (h-5 w-12)
+  3) One line for details (h-4 w-2/3)
+  4) One line for location (h-4 w-1/2)
+  5) Row of three small “pill” rectangles (h-4 w-10 each)
+  Everything uses animate-pulse and bg-gray-300 to shimmer.
+-->
+<div class="animate-pulse bg-[#34495E]/80 rounded-lg shadow-lg overflow-hidden">
+  <!-- 1) Image placeholder (exactly same size as real <img class="h-48 w-full">) -->
+  <div class="h-48 w-full bg-gray-300"></div>
+
+  <div class="p-4 space-y-2">
+    <!-- 2) Price/title + badge row -->
+    <div class="flex justify-between items-center mb-2">
+      <!-- Price/title placeholder (~ text-xl height) -->
+      <div class="h-6 bg-gray-300 rounded w-1/3"></div>
+      <!-- Badge placeholder (small pill) -->
+      <div class="h-5 bg-gray-300 rounded w-12"></div>
+    </div>
+
+    <!-- 3) Detail line placeholder (e.g. Beds•Baths•Size or Size•Utilities) -->
+    <div class="h-4 bg-gray-300 rounded w-2/3"></div>
+
+    <!-- 4) Location line placeholder (e.g. “City, State”) -->
+    <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+
+    <!-- 5) Three small “pill” placeholders for features/zoning badges -->
+    <div class="flex flex-wrap gap-2 mt-2">
+      <div class="h-4 bg-gray-300 rounded w-10"></div>
+      <div class="h-4 bg-gray-300 rounded w-10"></div>
+      <div class="h-4 bg-gray-300 rounded w-10"></div>
+    </div>
+  </div>
+</div>

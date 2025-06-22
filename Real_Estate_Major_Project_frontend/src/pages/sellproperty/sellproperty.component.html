@@ -1,0 +1,96 @@
+<!-- sell-property.component.html -->
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header Section -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl mb-4">
+          List Your Property
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Get started by selecting what type of property you want to sell
+        </p>
+      </div>
+  
+      <!-- Property Type Selection Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <!-- Land Card -->
+        <div 
+          (click)="selectPropertyType('land')"
+          [class]="selectedType === 'land' ? 
+            'ring-4 ring-indigo-500 transform scale-[1.02]' : 
+            'hover:ring-2 hover:ring-indigo-300 hover:transform hover:scale-[1.01]'"
+          class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 cursor-pointer"
+        >
+          <div class="h-48 bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+            <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Sell Land</h3>
+            <p class="text-gray-600 mb-4">
+              List your vacant land, agricultural property, or development plots
+            </p>
+            <button 
+              [class]="selectedType === 'land' ? 
+                'bg-indigo-600 text-white' : 
+                'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+              class="w-full py-3 px-6 rounded-lg font-medium transition-colors duration-300"
+            >
+              {{
+                selectedType === 'land' ? 
+                '✓ Selected' : 
+                'Choose Land'
+              }}
+            </button>
+          </div>
+        </div>
+  
+        <!-- House/Flat Card -->
+        <div 
+          (click)="selectPropertyType('house')"
+          [class]="selectedType === 'house' ? 
+            'ring-4 ring-indigo-500 transform scale-[1.02]' : 
+            'hover:ring-2 hover:ring-indigo-300 hover:transform hover:scale-[1.01]'"
+          class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 cursor-pointer"
+        >
+          <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center">
+            <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Sell House/Flat</h3>
+            <p class="text-gray-600 mb-4">
+              List your residential property, apartment, villa, or commercial space
+            </p>
+            <button 
+              [class]="selectedType === 'house' ? 
+                'bg-indigo-600 text-white' : 
+                'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+              class="w-full py-3 px-6 rounded-lg font-medium transition-colors duration-300"
+            >
+              {{
+                selectedType === 'house' ? 
+                '✓ Selected' : 
+                'Choose House/Flat'
+              }}
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Continue Button (only shows when type is selected) -->
+      <div class="text-center" *ngIf="selectedType">
+        <button 
+          (click)="continueToForm()"
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+        >
+          Continue to Property Details
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>

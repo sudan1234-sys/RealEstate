@@ -1,0 +1,21 @@
+<!--
+  A “ghost” loader for the Bid History list:
+  - Each row mimics the real bid entry: amount/user on the left, timestamp on the right.
+  - Using light-gray backgrounds (bg-gray-100/300) and animate-pulse for shimmer.
+-->
+<div class="space-y-3 max-h-96 overflow-y-auto">
+  <!-- Render 4 placeholder rows -->
+  <div *ngFor="let _ of [1,2,3,4]"
+       class="flex items-center justify-between p-3 bg-gray-100 rounded-lg animate-pulse">
+    <!-- Left: amount + user placeholders -->
+    <div class="space-y-2">
+      <!-- Amount placeholder (~ text-xl) -->
+      <div class="h-5 bg-gray-300 rounded w-24"></div>
+      <!-- User name placeholder (~ text-sm) -->
+      <div class="h-4 bg-gray-300 rounded w-16"></div>
+    </div>
+
+    <!-- Right: timestamp placeholder (~ short text) -->
+    <div class="h-4 bg-gray-300 rounded w-12"></div>
+  </div>
+</div>

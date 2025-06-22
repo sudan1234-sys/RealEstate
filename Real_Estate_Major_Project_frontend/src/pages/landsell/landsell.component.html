@@ -1,0 +1,199 @@
+<form [formGroup]="landForm" (ngSubmit)="onSubmit()" class="max-w-2xl mx-auto p-8 bg-gray-50 rounded-xl shadow-lg border border-gray-100">
+    <!-- Form Header -->
+    <div class="mb-12 text-center">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-3">Sell Your Land</h2>
+      <p class="text-gray-600 text-md">Create an attractive listing with detailed information</p>
+    </div>
+  
+    <!-- Main Form Content -->
+    <div class="space-y-10">
+      <!-- Size & Type Section -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Size Input -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+              <span class="mr-2">📏</span>
+              Land Size (m²)
+              <span class="text-red-500 ml-1">*</span>
+            </label>
+            <div class="relative">
+              <input type="number" formControlName="size" 
+                     class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+              <span class="absolute right-4 top-3.5 text-gray-500">m²</span>
+            </div>
+          </div>
+  
+          <!-- Type Select -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+              <span class="mr-2">🏷️</span>
+              Property Type
+              <span class="text-red-500 ml-1">*</span>
+            </label>
+            <select formControlName="type" 
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+              <option value="">Select property type</option>
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+              <option value="agricultural">Agricultural</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Location Section -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+          <span class="mr-2">📍</span>
+          Location Information
+        </h3>
+  
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <input type="text" formControlName="street" placeholder="Street Address"
+                   class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400">
+          </div>
+          
+          <div>
+            <input type="text" formControlName="city" placeholder="City"
+                   class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400">
+          </div>
+  
+          <div>
+            <input type="text" formControlName="state" placeholder="State"
+                   class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400">
+          </div>
+  
+          <div>
+            <input type="text" formControlName="postalCode" placeholder="Postal Code"
+                   class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pricing & Details Section -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+          <span class="mr-2">💰</span>
+          Pricing & Features
+        </h3>
+  
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Price Input -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Price ($)</label>
+            <div class="relative">
+              <span class="absolute left-4 top-3.5 text-gray-500">$</span>
+              <input type="number" formControlName="price" placeholder="Enter price"
+                     class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+            </div>
+          </div>
+  
+          <!-- Zoning Select -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Zoning Type</label>
+            <select formControlName="zoning" 
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+              <option value="">Select zoning type</option>
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+              <option value="industrial">Industrial</option>
+            </select>
+          </div>
+  
+          <!-- Utilities Checkbox -->
+          <div class="md:col-span-2">
+            <label class="flex items-center space-x-3">
+              <input type="checkbox" formControlName="hasUtilities" 
+                     class="w-5 h-5 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500">
+              <span class="text-gray-700 font-medium">Utilities Available</span>
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Photos Section -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+          <span class="mr-2">📸</span>
+          Property Photos
+        </h3>
+  
+        <div formArrayName="photos" class="space-y-4">
+          <div *ngFor="let photo of photos.controls; let i = index" [formGroupName]="i" 
+               class="flex items-center gap-3">
+            <input type="url" formControlName="photoUrl" placeholder="https://example.com/photo.jpg"
+                   class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+            <button type="button" (click)="removePhoto(i)" 
+                    class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+          <button type="button" (click)="addPhoto()" 
+                  class="w-full py-2.5 text-indigo-600 hover:text-indigo-700 font-medium flex items-center justify-center gap-2 border-2 border-dashed border-indigo-200 rounded-lg hover:border-indigo-300 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+            Add Photo URL
+          </button>
+        </div>
+      </div>
+  
+      <!-- Features Section -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+          <span class="mr-2">✅</span>
+          Key Features
+        </h3>
+  
+        <div formArrayName="features" class="space-y-4">
+          <div *ngFor="let feature of features.controls; let i = index" 
+          [formGroupName]="i"
+               class="flex items-center gap-3">
+            <input type="text" formControlName="feature" placeholder="Enter feature (e.g., Waterfront, Mountain View)"
+                   class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+            <button type="button" (click)="removeFeature(i)" 
+                    class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+          <button type="button" (click)="addFeature()" 
+                  class="w-full py-2.5 text-indigo-600 hover:text-indigo-700 font-medium flex items-center justify-center gap-2 border-2 border-dashed border-indigo-200 rounded-lg hover:border-indigo-300 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+            Add Feature
+          </button>
+        </div>
+      </div>
+  
+      <!-- Description Section -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center border-l-4 border-indigo-500 pl-3">
+          <span class="mr-2">📝</span>
+          Description
+        </h3>
+        <textarea formControlName="description" rows="5" placeholder="Describe your property in detail..."
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400"></textarea>
+      </div>
+  
+      <!-- Form Actions -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-between">
+        <button type="button" class="px-6 py-3 text-gray-600 hover:text-gray-800 font-medium flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back
+        </button>
+        <button 
+                class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed">
+          Publish Listing →
+        </button>
+      </div>
+    </div>
+  </form>

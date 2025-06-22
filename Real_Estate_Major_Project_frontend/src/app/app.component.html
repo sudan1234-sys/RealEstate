@@ -1,0 +1,15 @@
+<!-- app.component.html -->
+<div class="min-h-screen flex flex-col">
+  <!-- Main Content - This container will push footer down -->
+  <div class="flex-grow">
+    <!-- Animation wrapper - now uses min-height instead of fixed height -->
+    <div class="relative min-h-[calc(100vh-64px)]" [@routeAnimations]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+  </div>
+
+  <!-- Footer - Now properly positioned in document flow
+  <footer class="py-4 bg-[#1B2631] text-center h-16 flex items-center justify-center">
+    <p class="text-white">&copy; 2025 EstateX. All rights reserved.</p>
+  </footer> -->
+</div>

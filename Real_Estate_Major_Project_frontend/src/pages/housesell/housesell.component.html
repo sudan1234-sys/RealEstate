@@ -1,0 +1,237 @@
+<form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="max-w-4xl mx-auto p-8 bg-gray-50 rounded-xl shadow-lg border border-gray-100">
+  <!-- Form Header -->
+  <div class="mb-12 text-center">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-3">Sell Your House</h2>
+    <p class="text-gray-600 text-md">Create an attractive listing with detailed information</p>
+  </div>
+
+  <!-- Main Form Content -->
+  <div class="space-y-10">
+    <!-- House Basics Section -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+        <span class="mr-2">🏠</span>
+        House Basics
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Auction Toggle -->
+        <div class="md:col-span-2">
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" formControlName="isAuction" class="sr-only peer">
+            <div class="relative w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-indigo-600 peer-focus:ring-4 peer-focus:ring-indigo-300 transition-colors">
+              <div class="absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full transition-transform peer-checked:translate-x-5"></div>
+            </div>
+            <span class="ml-3 text-sm font-medium text-gray-900">Enable Auction</span>
+          </label>
+        </div>
+
+        <!-- Price Input -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Price ($) (<span>Not Sure About the Price?</span ><span style="color: blue;"><button class="hover" (click)="gotopriceprediction()"> Predict Price</button></span>)</label>
+          <div class="relative">
+            <span class="absolute left-4 top-3.5 text-gray-500">$</span>
+            <input formControlName="price" type="number" placeholder="Enter price"
+                  class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+          </div>
+        </div>
+
+        <!-- Auction Fields -->
+        <div *ngIf="propertyForm.get('isAuction')?.value" class="md:col-span-2 space-y-4">
+          <!-- Auction End Date -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Auction End Date</label>
+            <input formControlName="endTime" type="datetime-local" 
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+          
+          </div>
+
+          <!-- Minimum Bid Increment -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Bid Increment ($)</label>
+            <div class="relative">
+              <span class="absolute left-4 top-3.5 text-gray-500">$</span>
+              <input formControlName="minBidIncrement" type="number" min="100" 
+                    class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+              
+            </div>
+          </div>
+        </div>
+
+        <!-- Type Select -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">House Type</label>
+          <select formControlName="type" 
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+            <option value="House">House</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Condo">Condo</option>
+            <option value="Townhouse">Townhouse</option>
+          </select>
+        </div>
+
+        <!-- Bedrooms -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Bedrooms</label>
+          <input formControlName="bedrooms" type="number" 
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+        </div>
+
+        <!-- Bathrooms -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Bathrooms</label>
+          <input formControlName="bathrooms" type="number" 
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+        </div>
+      </div>
+    </div>
+
+    <!-- Location Section -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+        <span class="mr-2">📍</span>
+        Location Details
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <input formControlName="street" type="text" placeholder="Street Address"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400">
+        </div>
+        
+        <div>
+          <input formControlName="city" type="text" placeholder="City"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400">
+        </div>
+
+        <div>
+          <input formControlName="state" type="text" placeholder="State"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400">
+        </div>
+
+        <div>
+          <input formControlName="postalCode" type="text" placeholder="Postal Code"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400">
+        </div>
+      </div>
+    </div>
+
+    <!-- House Details Section -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+        <span class="mr-2">📐</span>
+        House Specifications
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Square Footage</label>
+          <div class="relative">
+            <input formControlName="squareFootage" type="number" 
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+            <span class="absolute right-4 top-3.5 text-gray-500">sqft</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Year Built</label>
+          <input formControlName="yearBuilt" type="number" 
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Garage Spaces</label>
+          <input formControlName="garage" type="number" 
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Land Size</label>
+          <input formControlName="landSize" type="text" 
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+        <span class="mr-2">✅</span>
+        Special Features
+      </h3>
+
+      <div formArrayName="features" class="space-y-4">
+        <div *ngFor="let feature of features.controls; let i = index" class="flex items-center gap-3">
+          <input [formControlName]="i" type="text" placeholder="Enter feature (e.g., Swimming Pool, Garden)"
+                class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+          <button type="button" (click)="removeFeature(i)" 
+                  class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <button type="button" (click)="addFeature()" 
+                class="w-full py-2.5 text-indigo-600 hover:text-indigo-700 font-medium flex items-center justify-center gap-2 border-2 border-dashed border-indigo-200 rounded-lg hover:border-indigo-300 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+          </svg>
+          Add Feature
+        </button>
+      </div>
+    </div>
+
+    <!-- Photos Section -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-800 mb-6 flex items-center border-l-4 border-indigo-500 pl-3">
+        <span class="mr-2">📸</span>
+        House Gallery
+      </h3>
+
+      <div formArrayName="photos" class="space-y-4">
+        <div *ngFor="let photo of photos.controls; let i = index" [formGroupName]="i" 
+              class="flex items-center gap-3">
+          <input type="url" formControlName="photoUrl" placeholder="https://example.com/photo.jpg"
+                class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700">
+          <button type="button" (click)="removePhoto(i)" 
+                  class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <button type="button" (click)="addPhoto()" 
+                class="w-full py-2.5 text-indigo-600 hover:text-indigo-700 font-medium flex items-center justify-center gap-2 border-2 border-dashed border-indigo-200 rounded-lg hover:border-indigo-300 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+          </svg>
+          Add Photo URL
+        </button>
+      </div>
+    </div>
+
+    <!-- Description Section -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center border-l-4 border-indigo-500 pl-3">
+        <span class="mr-2">📝</span>
+        House Description
+      </h3>
+      <textarea formControlName="description" rows="5" placeholder="Describe your House in detail..."
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-700 placeholder-gray-400"></textarea>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-between">
+      <button type="button" class="px-6 py-3 text-gray-600 hover:text-gray-800 font-medium flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back
+      </button>
+      <button type="submit"
+              class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed">
+        Publish Listing →
+      </button>
+    </div>
+  </div>
+</form>

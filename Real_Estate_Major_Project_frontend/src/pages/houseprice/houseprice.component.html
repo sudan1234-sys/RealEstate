@@ -1,0 +1,62 @@
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+  <form (ngSubmit)="predict()" #form="ngForm" class="bg-white shadow-md rounded p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-center">🏠 House Price Predictor</h2>
+
+    <div class="mb-4">
+      <label class="block text-gray-700">Square Footage</label>
+      <input type="number" [(ngModel)]="formData.square_ft" name="square_ft" required
+             class="w-full border rounded px-3 py-2 mt-1"/>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700">Latitude</label>
+      <input type="number" step="any" [(ngModel)]="formData.latitude" name="latitude" required
+             class="w-full border rounded px-3 py-2 mt-1"/>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700">Longitude</label>
+      <input type="number" step="any" [(ngModel)]="formData.longitude" name="longitude" required
+             class="w-full border rounded px-3 py-2 mt-1"/>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700">Posted By</label>
+      <select [(ngModel)]="formData.posted_by" name="posted_by"
+              class="w-full border rounded px-3 py-2 mt-1">
+        <option [value]="0">Dealer</option>
+        <option [value]="1">Owner</option>
+        <option [value]="2">Builder</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700">Ready to Move</label>
+      <select [(ngModel)]="formData.ready_to_move" name="ready_to_move"
+              class="w-full border rounded px-3 py-2 mt-1">
+        <option [value]="1">Yes</option>
+        <option [value]="0">No</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700">Under Construction</label>
+      <select [(ngModel)]="formData.under_construction" name="under_construction"
+              class="w-full border rounded px-3 py-2 mt-1">
+        <option [value]="1">Yes</option>
+        <option [value]="0">No</option>
+      </select>
+    </div>
+
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+      Predict Price
+    </button>
+
+    <div *ngIf="predictedPrice" class="mt-6 text-center text-green-600 font-semibold text-xl">
+      💰 Estimated Price: ₹{{ predictedPrice }} Lacs
+    </div>
+  </form>
+</div>
+
