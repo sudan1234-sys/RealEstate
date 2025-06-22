@@ -23,6 +23,7 @@ public class PropertyController {
     private PropertyService propertyService;
 
     @CrossOrigin(origins = "http://localhost:4200/")
+    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
     @PostMapping
     @RequestMapping("/saveProperty/{userId}")
     public ResponseEntity<String> saveProperty(@PathVariable Long userId, @RequestBody Property property) {
@@ -31,6 +32,7 @@ public class PropertyController {
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
+    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
     @GetMapping
     @RequestMapping("/getProperties")
     public ResponseEntity<List<Property>> getProperty() {
@@ -39,6 +41,7 @@ public class PropertyController {
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
+    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
     @GetMapping
     @RequestMapping("/getUsers")
     public ResponseEntity<List<User>> getUsers() {
@@ -51,6 +54,7 @@ public class PropertyController {
         return propertyService.saveProperty(property);
     }
     @CrossOrigin(origins = "http://localhost:4200/")
+    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
     @GetMapping("/active")
     public List<PropertyListDTO> getActiveProperties() {
         return propertyService2.getActiveProperties();

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
 @RequestMapping("/property")
 public class LandController {
     @Autowired
@@ -19,6 +20,7 @@ public class LandController {
 
     @PostMapping
     @CrossOrigin(origins = "http://localhost:4200/")
+    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
     @RequestMapping("/saveLand/{userId}")
 
     public ResponseEntity<String> addLand(@PathVariable Long userId, @RequestBody Land land) {
@@ -26,6 +28,7 @@ public class LandController {
         return ResponseEntity.ok("Property added and linked with user!");
     }
     @CrossOrigin(origins = "http://127.0.0.1:5500")
+    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
     @GetMapping
     @RequestMapping("/getLands")
     public ResponseEntity<List<Land>> getLands(){

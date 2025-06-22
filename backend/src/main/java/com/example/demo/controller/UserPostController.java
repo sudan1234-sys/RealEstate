@@ -11,6 +11,7 @@ public class UserPostController {
   @Autowired
   private UserService userService;
   @CrossOrigin(origins = "http://localhost:4200/")
+  @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
   @PostMapping("/saveuser")
   public ResponseEntity<String> saveUser(@RequestBody User user) {
    String message= userService.save(user);
