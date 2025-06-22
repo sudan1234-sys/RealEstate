@@ -13,9 +13,9 @@ export class TophouseandlandService {
 // this.http.get(`${environment.baseUrl}
   constructor(private http: HttpClient) { }
   getTopHouse() {
-    return this.http.get<House[]>(`${environment.baseUrl}users/all-properties`);
+    return this.http.get<House[]>(`${environment.baseUrl}/users/all-properties`);
   }
   getTopLand() {
-    return this.http.get<Land[]>(`${environment.baseUrl}users/all-lands`);
+    return this.http.get<Land[]>(`${environment.baseUrl}/users/all-lands`);
   }
 }
