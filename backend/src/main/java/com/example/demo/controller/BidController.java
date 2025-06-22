@@ -11,8 +11,7 @@ import java.util.List;
 // BidController.java
 // https://real-estate-8i16.vercel.app
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
-@CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
 @RequestMapping("/api/bids")
 public class BidController {
 
@@ -20,8 +19,7 @@ public class BidController {
     private BidService bidService;
 
     // Place a bid (using path variables or request parameters)
-    @CrossOrigin(origins = "http://localhost:4200/")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @PostMapping("/place")
     public ResponseEntity<Bid> placeBid(
             @RequestParam Long propertyId,
@@ -33,8 +31,7 @@ public class BidController {
     }
 
     // Get all bids for a property
-    @CrossOrigin(origins = "http://localhost:4200/")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @GetMapping("/property/{propertyId}")
     public ResponseEntity<List<Bid>> getBidsForProperty(@PathVariable Long propertyId) {
         List<Bid> bids = bidService.getBidsForProperty(propertyId);

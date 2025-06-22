@@ -22,8 +22,7 @@ public class PropertyController {
 
     private PropertyService propertyService;
 
-    @CrossOrigin(origins = "http://localhost:4200/")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+    @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @PostMapping
     @RequestMapping("/saveProperty/{userId}")
     public ResponseEntity<String> saveProperty(@PathVariable Long userId, @RequestBody Property property) {
@@ -31,8 +30,7 @@ public class PropertyController {
         return ResponseEntity.ok("Property added and linked with user!");
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+   @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @GetMapping
     @RequestMapping("/getProperties")
     public ResponseEntity<List<Property>> getProperty() {
@@ -40,8 +38,7 @@ public class PropertyController {
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+   @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @GetMapping
     @RequestMapping("/getUsers")
     public ResponseEntity<List<User>> getUsers() {
@@ -53,8 +50,7 @@ public class PropertyController {
         property.setIsActive(true); // Ensure new properties are active
         return propertyService.saveProperty(property);
     }
-    @CrossOrigin(origins = "http://localhost:4200/")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+    @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @GetMapping("/active")
     public List<PropertyListDTO> getActiveProperties() {
         return propertyService2.getActiveProperties();

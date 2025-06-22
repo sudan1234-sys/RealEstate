@@ -19,16 +19,14 @@ public class LandController {
     private LandService landService;
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:4200/")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @RequestMapping("/saveLand/{userId}")
 
     public ResponseEntity<String> addLand(@PathVariable Long userId, @RequestBody Land land) {
         landService.addLand(userId,land); // Call service to save property
         return ResponseEntity.ok("Property added and linked with user!");
     }
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+   @CrossOrigin(origins = {"http://127.0.0.1:5500", "https://real-estate-8i16.vercel.app"})
     @GetMapping
     @RequestMapping("/getLands")
     public ResponseEntity<List<Land>> getLands(){

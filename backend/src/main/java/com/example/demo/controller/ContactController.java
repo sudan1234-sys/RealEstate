@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/contact")
-@CrossOrigin(origins = "http://localhost:4200") // Allow Angular requests
+@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
 public class ContactController {
 
     @Autowired
     private EmailService emailService;
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
+    @CrossOrigin(origins = {"http://127.0.0.1:5500", "https://real-estate-8i16.vercel.app"})
     @PostMapping
     public ResponseEntity<String> submitContactForm(@RequestBody ContactFormDto contactForm) {
         try {

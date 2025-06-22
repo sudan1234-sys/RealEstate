@@ -30,8 +30,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @CrossOrigin(origins = "http://localhost:4200/")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+   @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @GetMapping("/with-properties")
     public List<UserWithPropertiesDTO> getUsersWithProperties() {
         return userService.getUsersWithProperties();
@@ -41,8 +40,7 @@ public class UserController {
     public List<UserWithLandsDTO> getUsersWithLands() {
         return userService.getUsersWithLands();
     }
-    @CrossOrigin(origins = "http://localhost:4200/")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+  @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     @GetMapping("/all-properties")
     public List<PropertyListDTO> getAllProperties() {
         // Get top 5 IDs first (with proper ordering)
@@ -57,8 +55,7 @@ public class UserController {
                 .collect(Collectors.toList());
     }
     @GetMapping( "/all-lands")
-    @CrossOrigin(origins = "http://localhost:4200/")
-    @CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+   @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
     public List<LandListDTO> getAlLands() {
         List<Long> top4Ids = landRepository.findTop4LandsIds(PageRequest.of(0, 4));
         return landRepository.findLandsWithDetails(top4Ids).stream()
