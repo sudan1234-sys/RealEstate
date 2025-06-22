@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 
 @RequestMapping("/api/properties")
-@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16-kkn06gb9w-sudan1234-sys-projects.vercel.app/"})
 public class PropertyFilterController {
     private final PropertyService propertyService;
 
@@ -30,7 +30,7 @@ public class PropertyFilterController {
 
 
     @GetMapping("/filter")
-@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16-kkn06gb9w-sudan1234-sys-projects.vercel.app/"})
         public ResponseEntity<List<PropertyListDTO>> filterProperties(
                 @RequestParam(required = false) String type,
                 @RequestParam(required = false) String city,
@@ -62,7 +62,7 @@ public class PropertyFilterController {
 
         // Paginated endpoint (optional)
         @GetMapping("/filter/paginated")
-       @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
+       @CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16-kkn06gb9w-sudan1234-sys-projects.vercel.app/"})
         public ResponseEntity<Page<Property>> filterPropertiesPaginated(
                 @RequestParam(required = false) String type,
                 @RequestParam(required = false) String city,
