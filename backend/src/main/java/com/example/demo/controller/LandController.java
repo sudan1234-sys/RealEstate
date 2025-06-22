@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
-@CrossOrigin(origins = "https://real-estate-8i16.vercel.app")
+@CrossOrigin(origins = {"http://localhost:4200/", "https://real-estate-8i16.vercel.app"})
 @RequestMapping("/property")
 public class LandController {
     @Autowired
