@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 @Component({
   selector: 'app-landsell',
   imports: [CommonModule,ReactiveFormsModule],
@@ -35,7 +36,7 @@ export class LandsellComponent implements OnInit {
   onSubmit() {
     
       console.log('Form Submitted:', this.landForm.value);
-      this.http.post('http://localhost:8080/property/saveLand/1', this.landForm.value).subscribe(res => {
+      this.http.post(`${environment.baseUrl}/property/saveLand/1`, this.landForm.value).subscribe(res => {
         console.log('Response:', res);
       });
       // Handle form submission

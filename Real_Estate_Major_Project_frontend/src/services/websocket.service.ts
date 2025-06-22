@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { environment } from '../environment';
 
 export interface Bid {
   propertyId: number;
@@ -23,7 +24,7 @@ export class WebsocketService {
   }
 
   private initializeClient(): void {
-    const socket = new SockJS('http://localhost:8080/ws-bid');
+    const socket = new SockJS(`${environment.baseUrl}/ws-bid`);
     
     this.stompClient = new Client({
       webSocketFactory: () => socket as any,

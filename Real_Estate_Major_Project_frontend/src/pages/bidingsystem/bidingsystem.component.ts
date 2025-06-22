@@ -7,6 +7,7 @@ import { WebsocketService } from '../../services/websocket.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { BidskeletonComponent } from '../bidskeleton/bidskeleton.component';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-bidingsystem',
@@ -38,7 +39,7 @@ export class BidingsystemComponent implements OnInit, OnDestroy {
       this.currentBid = this.property.currentBid;
       this.bids = this.property.bids || [];
     }
-    this.http.get<any[]>(`http://localhost:8080/api/bids/property/${this.propertyId}`).subscribe(data => {
+    this.http.get<any[]>(`${environment.baseUrl}/api/bids/property/${this.propertyId}`).subscribe(data => {
       this.bids = data;
       this.isLoadingBids = false;
     });

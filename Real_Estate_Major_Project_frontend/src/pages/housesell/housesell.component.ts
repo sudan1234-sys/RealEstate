@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-housesell',
@@ -111,7 +112,7 @@ export class HousesellComponent {
     }
 
     console.log('Submitting:', payload);
-    this.http.post('http://localhost:8080/property/saveProperty/1', payload)
+    this.http.post(`${environment.baseUrl}/property/saveProperty/1`, payload)
       .subscribe({
         next: () => this.router.navigate(['/']),
         error: err => console.error('Save failed', err)

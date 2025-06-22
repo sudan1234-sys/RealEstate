@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { effect } from '@angular/core';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-signup',
@@ -40,7 +41,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
       console.log('Form submitted:', this.registerForm.value);
-      this.http.post('http://localhost:8080/user/saveuser', this.registerForm.value, { responseType: 'text' }).subscribe(res => {
+      this.http.post(`${environment.baseUrl}/user/saveuser`, this.registerForm.value, { responseType: 'text' }).subscribe(res => {
         console.log(res);
         alert(res);
     

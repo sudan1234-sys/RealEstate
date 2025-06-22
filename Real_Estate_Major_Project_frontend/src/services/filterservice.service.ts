@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { House } from '../models/housemodel';
+import { environment } from '../environment';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class FilterserviceService {
 
   async getfilteredstate(state: string): Promise<void> {
     const data = await firstValueFrom(
-      this.http.get<any[]>(`http://localhost:8080/api/properties/filter?state=${state}`)
+      this.http.get<any[]>(`${environment.baseUrl}/users/filtered-properties/${state}`)
     );
     // this.houses.set(data);
     this.houses.set(data.map(house => ({

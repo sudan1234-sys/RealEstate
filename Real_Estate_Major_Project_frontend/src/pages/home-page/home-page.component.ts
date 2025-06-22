@@ -17,6 +17,7 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CardskeletonComponent } from '../cardskeleton/cardskeleton.component';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-home-page',
@@ -232,7 +233,7 @@ city:string='';
   }
   onSubmit(){
     console.log(this.contactusform.value);
-   this.http.post('http://localhost:8080/api/contact',this.contactusform.value,{ responseType: 'text' }).subscribe(res=>{
+   this.http.post(`${environment.baseUrl}/api/contact`,this.contactusform.value,{ responseType: 'text' }).subscribe(res=>{
      alert(res);
    })
   }
