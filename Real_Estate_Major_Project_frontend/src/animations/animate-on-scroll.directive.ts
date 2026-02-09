@@ -1,22 +1,56 @@
 import { Directive, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-// Animation definitions
+/*
+  Responsive animation distances
+  Mobile → smaller movement
+  Desktop → slide from sides
+*/
+const getDistance = () => {
+  return window.innerWidth < 768
+    ? { x: 0, y: 60 }      // mobile → slide up
+    : { x: 120, y: 80 };   // desktop → side slides
+};
+
 const ANIMATIONS = {
   up: trigger('scrollUp', [
-    state('hidden', style({ opacity: 0, transform: 'translateY(200px)' })),
-    state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
-    transition('hidden => visible', animate('2000ms ease-out'))
+    state('hidden', style({
+      opacity: 0,
+      transform: `translateY(${getDistance().y}px)`
+    })),
+    state('visible', style({
+      opacity: 1,
+      transform: 'translateY(0)'
+    })),
+    transition('hidden => visible', animate('700ms ease-out'))
   ]),
+
   left: trigger('scrollLeft', [
-    state('hidden', style({ opacity: 0, transform: 'translateX(-500px)' })),
-    state('visible', style({ opacity: 1, transform: 'translateX(0)' })),
-    transition('hidden => visible', animate('2000ms ease-out'))
+    state('hidden', style({
+      opacity: 0,
+      transform: window.innerWidth < 768
+        ? `translateY(${getDistance().y}px)`     // mobile
+        : `translateX(-${getDistance().x}px)`    // desktop
+    })),
+    state('visible', style({
+      opacity: 1,
+      transform: 'translate(0,0)'
+    })),
+    transition('hidden => visible', animate('700ms ease-out'))
   ]),
+
   right: trigger('scrollRight', [
-    state('hidden', style({ opacity: 0, transform: 'translateX(200px)' })),
-    state('visible', style({ opacity: 1, transform: 'translateX(0)' })),
-    transition('hidden => visible', animate('2000ms ease-out'))
+    state('hidden', style({
+      opacity: 0,
+      transform: window.innerWidth < 768
+        ? `translateY(${getDistance().y}px)`
+        : `translateX(${getDistance().x}px)`
+    })),
+    state('visible', style({
+      opacity: 1,
+      transform: 'translate(0,0)'
+    })),
+    transition('hidden => visible', animate('700ms ease-out'))
   ])
 };
 
@@ -31,7 +65,9 @@ const ANIMATIONS = {
   }
 })
 export class AnimateOnScrollDirective implements AfterViewInit {
+
   @Input() animationType: 'up' | 'left' | 'right' = 'up';
+
   upState: 'hidden' | 'visible' = 'hidden';
   leftState: 'hidden' | 'visible' = 'hidden';
   rightState: 'hidden' | 'visible' = 'hidden';
@@ -48,22 +84,30 @@ export class AnimateOnScrollDirective implements AfterViewInit {
           }
         });
       },
-      { threshold: 0.25 }
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      }
     );
 
     observer.observe(this.el.nativeElement);
   }
 
   private triggerAnimation() {
-    switch(this.animationType) {
-      case 'up': this.upState = 'visible'; break;
-      case 'left': this.leftState = 'visible'; break;
-      case 'right': this.rightState = 'visible'; break;
+    switch (this.animationType) {
+      case 'up':
+        this.upState = 'visible';
+        break;
+      case 'left':
+        this.leftState = 'visible';
+        break;
+      case 'right':
+        this.rightState = 'visible';
+        break;
     }
   }
 }
 
-// Export animations for component registration
 export const SCROLL_ANIMATIONS = [
   ANIMATIONS.up,
   ANIMATIONS.left,
