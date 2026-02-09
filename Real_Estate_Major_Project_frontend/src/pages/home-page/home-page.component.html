@@ -28,78 +28,78 @@
       <h2 class="text-3xl sm:text-5xl font-bold text-[#FFFFFF] leading-tight drop-shadow-lg">Find Your Dream Home</h2>
       
       <!-- Search Bar & Dynamic Results Wrapper -->
-      <div class="flex flex-col w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden mt-5 relative z-10">
-        <div class="flex">
-          <!-- Dropdown -->
-          <!-- <select (input)="getState($event)" class="shrink-0 px-4 py-3 bg-gray-200 text-gray-700 border-l border-gray-300 focus:outline-none text-sm sm:text-base">
-            <option value="">Select State</option>
-            @for(states of indianStates; track $index){
-              <option [value]="states">{{states}}</option>
-            }
-          </select> -->
-          <div class="shrink-0 relative">
-            <!-- Input field with autocomplete -->
-            <input 
-              type="text"
-              [(ngModel)]="selectedState"
-              (ngModelChange)="filterstate()"
-              (click)="toggleStateDropdown()"
-              [matAutocomplete]="auto"
-              placeholder="Select State"
-              class="w-full px-4 py-3 bg-gray-200 text-gray-700 border-l border-gray-300 focus:outline-none text-sm sm:text-base"
-            >
-            
-            <!-- Dropdown arrow icon -->
-            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            
-            <!-- Autocomplete panel -->
-            <mat-autocomplete #auto="matAutocomplete" [classList]="'bg-white shadow-lg rounded-b-lg mt-1'">
-              @for (state of filterdStates; track state) {
-                <mat-option [value]="state" class="hover:bg-gray-100 px-4 py-2">
-                  {{state}}
-                </mat-option>
-              }
-            </mat-autocomplete>
-          </div>
-          
-          <!-- Input Field -->
-          <input 
-            type="text" (click)="togglesearch()" [(ngModel)]='searchvalue' (ngModelChange)="filterCity()"
-            placeholder="Enter City State or Locality..." 
-            class="min-w-0 flex-1 px-4 py-3 text-gray-700 focus:outline-none placeholder-gray-500 text-sm sm:text-base" 
-          />
-          <!-- Search Button -->
-          <button (click)="goToDummy()" class="shrink-0 px-6 py-3 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 text-sm sm:text-base">
-            Search
-          </button>
-        </div>
-        <!-- Dynamic Search Results Container -->
-       @if(toggle){ <div   class="mt-4 w-full bg-white text-purple-500 rounded-lg shadow-lg p-4 relative z-20">
-          <!-- Render your search results here -->
-          @if(!isReady){
-            @for(city of searchResults; track $index){
-              
-              <div (click)="fillsearch(city)" class="py-2 border-b border-gray-200 last:border-none hover:cursor-pointer">
-                {{city}}
-              </div>
-            
-           
-            }
-          }
-          @else {
-            <div style="display: flex; align-items: center;justify-content: center;"><mat-spinner></mat-spinner></div>
-            
+<div class="w-full max-w-2xl mx-auto mt-6 relative z-30 px-2">
 
-          }
-          
-          </div>
-      
-      }
+  <div class="flex items-center bg-white rounded-xl shadow-xl overflow-hidden h-[46px] sm:h-[52px]">
+
+    <!-- STATE -->
+    <div class="relative flex-[1.4] min-w-[110px]">
+      <input 
+        type="text"
+        [(ngModel)]="selectedState"
+        (ngModelChange)="filterstate()"
+        [matAutocomplete]="auto"
+        placeholder="State"
+        class="w-full h-full px-3 text-gray-700 bg-gray-100 focus:outline-none text-sm truncate"
+      >
+
+      <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
       </div>
+
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (state of filterdStates; track state) {
+          <mat-option [value]="state">
+            {{state}}
+          </mat-option>
+        }
+      </mat-autocomplete>
+    </div>
+
+    <!-- CITY -->
+    <input 
+      type="text"
+      (click)="togglesearch()"
+      [(ngModel)]="searchvalue"
+      (ngModelChange)="filterCity()"
+      placeholder="City"
+      class="flex-[2.2] min-w-0 h-full px-3 text-gray-700 focus:outline-none text-sm"
+    />
+
+    <!-- BUTTON -->
+    <button 
+      (click)="goToDummy()"
+      class="flex-[0.9] min-w-[70px] h-full px-2 sm:px-4 bg-blue-500 text-white font-semibold hover:bg-blue-600 transition text-sm whitespace-nowrap"
+    >
+      Search
+    </button>
+
+  </div>
+
+  <!-- RESULTS -->
+  @if(toggle){
+  <div class="absolute left-0 right-0 mt-2 bg-white rounded-xl shadow-xl max-h-64 overflow-y-auto">
+    @if(!isReady){
+      @for(city of searchResults; track $index){
+        <div 
+          (click)="fillsearch(city)"
+          class="px-4 py-2 border-b last:border-none hover:bg-gray-100 cursor-pointer text-sm"
+        >
+          {{city}}
+        </div>
+      }
+    }
+    @else{
+      <div class="flex justify-center py-4 ">
+        <mat-spinner diameter="24"></mat-spinner>
+      </div>
+    }
+  </div>
+  }
+</div>
+
       
       <!-- Optional Test Container (if needed) -->
       

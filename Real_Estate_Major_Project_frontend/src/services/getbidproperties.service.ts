@@ -11,6 +11,6 @@ export class GetbidpropertiesService {
   constructor(private http: HttpClient) { }
 
   getBidProperties() {
-    return this.http.get<House[]>(`$environment.baseUrl}/users/bid-properties`);
+    return this.http.get<House[]>(`${environment.baseUrl}/property/active`);
   }
 }
